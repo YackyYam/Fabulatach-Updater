@@ -19,3 +19,5 @@ foreach ($row in $fab_installed) {
     Get-Package -Name $row.Name | Uninstall-Package -Force
     }
 }
+
+Write-Host "Please reboot the computer and run the Install script."
