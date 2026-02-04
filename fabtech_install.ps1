@@ -39,15 +39,21 @@ Write-host "Deleteing: " $fab_file_usb
 Write-host "Deleteing: " $fab_file_webcam
 Write-host "Deleteing: " $fab_file_sound
 
-Clear-Host
+Write-host ""
+Write-host ""
 
 Write-host "Setting up Fabulatech services."
-
-sc config ftnlsv3 start= delayed-auto
-sc config ftscansvc start= delayed-auto
-sc config ftsndsvc start= delayed-auto
-sc config ftusbrdsrv start= delayed-auto
-sc config ftwebcamlicsvc start= delayed-auto
+Write-host ""
+Write-host "Setting 'ftnlsv3' to Delayed Start."
+Set-Service -Name "ftnlsv3" -StartupType AutomaticDelayedStart
+Write-host "Setting 'ftscansvc' to Delayed Start."
+Set-Service -Name "ftscansvc" -StartupType AutomaticDelayedStart
+Write-host "Setting 'ftsndsvc' to Delayed Start."
+Set-Service -Name "ftsndsvc" -StartupType AutomaticDelayedStart
+Write-host "Setting 'ftusbrdsrv' to Delayed Start."
+Set-Service -Name "ftusbrdsrv" -StartupType AutomaticDelayedStart
+Write-host "Setting 'ftwebcamlicsvc' to Delayed Start."
+Set-Service -Name "ftwebcamlicsvc" -StartupType AutomaticDelayedStart
 sc stop ftusbrdsrv
 reg delete HKLM\SYSTEM\CurrentControlSet\Enum\FABULATECH.COM  /v ftusbrdsrv /f
 sc start ftusbrdsrv
@@ -61,5 +67,6 @@ sc stop ftsndsvc
 reg delete HKLM\SYSTEM\CurrentControlSet\Enum\FABULATECH.COM  /v ftsndsvc /f
 sc start ftsndsvc
 
+Write-host ""
 Write-host ""
 Write-host "Done."
